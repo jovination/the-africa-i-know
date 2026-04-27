@@ -14,11 +14,11 @@ export default function Header(){
             </div>
             <div>
                 <Link href="">
-                <Image src="/Africa-new.png" className="size-32 md:size-32" width={120} height={120} alt="logo" />
+                <Image src="/Africa-new.png" className="size-24 md:size-32" width={120} height={120} alt="logo" />
                 </Link>
             </div>
 
-            <div className="hidden md:block">
+            <div className="hidden md:block ">
                 <Button variant="outline" className="text-sm font-bold text-black border-2 border-black px-6">Join the Movement </Button>
                 <Button variant="ghost" className="text-sm font-bold">Eng 
                 </Button>    
