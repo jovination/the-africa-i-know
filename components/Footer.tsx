@@ -1,10 +1,17 @@
 import Image from "next/image"
 import Link from "next/link"
+import JoinForm from "./JoinForm";
+
 
 export default function Footer(){
     const currentYear = new Date().getFullYear();
     return (
         <div>
+            <div className="w-full bg-[#2C2421] py-10">
+                <div className="max-w-2xl w-full mx-auto flex flex-col items-center">
+                <JoinForm />
+                </div>
+             </div>   
             <div className="w-full bg-black">
                 <div className="container mx-auto flex flex-col items-center py-10">
                     <Image src="/the-africa-logo-footer.png" width={200} height={200} alt="logo" />
