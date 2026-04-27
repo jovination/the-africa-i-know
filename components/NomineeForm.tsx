@@ -135,7 +135,7 @@ function NomineeFormComponent() {
     <>
       <form id="nominee-form" onSubmit={form.handleSubmit(onSubmit)}>
         <FieldGroup>
-            <div className="grid grid-cols-1 grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <Controller
             name="name"
             control={form.control}
@@ -150,7 +150,7 @@ function NomineeFormComponent() {
                   aria-invalid={fieldState.invalid}
                   placeholder="Enter your full name"
                   autoComplete="name"
-                  className="h-11"
+                  className="h-13"
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -173,7 +173,7 @@ function NomineeFormComponent() {
                   aria-invalid={fieldState.invalid}
                   placeholder="Enter your email"
                   autoComplete="email"
-                  className="h-11"
+                  className="h-13"
 
                   
                 />
@@ -197,7 +197,7 @@ function NomineeFormComponent() {
                   id="form-subject"
                   aria-invalid={fieldState.invalid}
                   placeholder="Nominating an Everyday Builder or Builder Spotlight [City/Country]"
-                  className="h-11"
+                  className="h-13"
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -241,7 +241,7 @@ function NomineeFormComponent() {
         <Button 
           type="submit" 
           form="nominee-form" 
-          className="w-fit mt-10 h-11"
+          className="w-fit mt-10 h-13 px-6"
           disabled={isSubmitting}
         >
           {isSubmitting ? (

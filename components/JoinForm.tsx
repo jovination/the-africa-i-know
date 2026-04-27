@@ -137,7 +137,7 @@ function JoinFormComponent() {
                   aria-invalid={fieldState.invalid}
                   placeholder="Enter your full name"
                   autoComplete="name"
-                  className="h-11 bg-transparent border-white/10 text-white placeholder:text-gray-400"
+                  className="h-13 bg-transparent border-white/10 text-white placeholder:text-gray-400"
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -160,7 +160,7 @@ function JoinFormComponent() {
                   aria-invalid={fieldState.invalid}
                   placeholder="Enter your email"
                   autoComplete="email"
-                  className="h-11 bg-transparent border-white/10 text-white placeholder:text-gray-400"
+                  className="h-13 bg-transparent border-white/10 text-white placeholder:text-gray-400"
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -174,7 +174,7 @@ function JoinFormComponent() {
         <Button 
           type="submit" 
           form="join-form" 
-          className="w-full h-11 bg-white text-black hover:bg-white  transition-colors duration-200 font-semibold"
+          className="w-full h-13 bg-white text-black hover:bg-white  transition-colors duration-200 font-semibold"
           disabled={isSubmitting}
         >
           {isSubmitting ? (
