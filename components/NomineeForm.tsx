@@ -68,6 +68,8 @@ export default function NomineeForm(){
 }
 
 function NomineeFormComponent() {
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -78,21 +80,55 @@ function NomineeFormComponent() {
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    toast("Nomination submitted successfully!", {
-      description: (
-        <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-      position: "bottom-right",
-      classNames: {
-        content: "flex flex-col gap-2",
-      },
-      style: {
-        "--border-radius": "calc(var(--radius)  + 4px)",
-      } as React.CSSProperties,
-    })
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    try {
+      // Use FormData instead of URLSearchParams for better compatibility
+      const formData = new FormData();
+      formData.append('name', data.name);
+      formData.append('email', data.email);
+      formData.append('subject', data.subject || '');
+      formData.append('message', data.message);
+
+      await fetch(
+        'https://script.google.com/macros/s/AKfycbxUh03v75-jyHm-KUPVO20cQnzvuJ4ttRiUlabtIWzkku4IqiHxVqENmS7D7ltulfZHnw/exec',
+        {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors', // This is critical for Google Scripts
+        }
+      );
+
+      // Because 'no-cors' returns an opaque response, 
+      // we manually trigger success if fetch doesn't throw.
+      toast("Nomination submitted successfully!", {
+        description: "Thank you for nominating an Everyday Builder. Your submission has been received.",
+        position: "bottom-right",
+        classNames: {
+          content: "flex flex-col gap-2",
+        },
+        style: {
+          "--border-radius": "calc(var(--radius)  + 4px)",
+        } as React.CSSProperties,
+      });
+      
+      form.reset();
+      
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast("Could not submit nomination", {
+        description: "There was an error submitting your nomination. Please check your connection and try again.",
+        position: "bottom-right",
+        classNames: {
+          content: "flex flex-col gap-2",
+        },
+        style: {
+          "--border-radius": "calc(var(--radius)  + 4px)",
+        } as React.CSSProperties,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -202,9 +238,21 @@ function NomineeFormComponent() {
         </FieldGroup>
       </form>
       <CardFooter>
-        <Button type="submit" form="nominee-form" className="w-fit mt-10 h-11 px-6">
-Nominate Now!        
-</Button>
+        <Button 
+          type="submit" 
+          form="nominee-form" 
+          className="w-fit mt-10 h-11"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              Submitting...
+            </div>
+          ) : (
+            "Nominate Now!"
+          )}
+        </Button>
       </CardFooter>
     </>
   )
