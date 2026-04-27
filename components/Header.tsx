@@ -24,7 +24,7 @@ export default function Header(){
                 </Button>    
             </div>
             <div className="md:hidden">
-                <Image src="/menu.svg" width={70} height={70} alt="logo" />
+                <Image src="/menu.svg" width={55} height={55} alt="logo" />
 
             </div>
 
