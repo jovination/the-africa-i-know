@@ -50,7 +50,7 @@ const formSchema = z.object({
 export default function NomineeForm(){
     return(
         <div className="w-full ">
-            <div className="p-10">
+            <div className="md:p-10">
                 <Card className="w-full rounded-3xl">
                     <CardHeader>
                         <CardTitle>Nominate a Builder</CardTitle>

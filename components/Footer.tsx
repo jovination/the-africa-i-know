@@ -14,11 +14,11 @@ export default function Footer(){
              </div>   
             <div className="w-full bg-black">
                 <div className="container mx-auto flex flex-col items-center py-10">
-                    <Image src="/the-africa-logo-footer.png" width={200} height={200} alt="logo" />
+                    <Image src="/African-new.png" width={150} height={150} alt="logo" />
 
                     <div className="grid grid-cols-3 gap-10 mt-10">
                     <Link href="/">
-                    <Image src="/apple-podcasts.png" width={155} height={155} alt="logo" />
+                    <Image src="/instagram.png" width={155} height={155} alt="logo" />
                     </Link>
                     <Link href="/">
                     <Image src="/spotify.png" width={150} height={150} alt="logo" />
