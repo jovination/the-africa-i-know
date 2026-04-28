@@ -112,14 +112,14 @@ export default function Header(){
                    <div className="mt-10">
                     <p className="text-md font-bold text-white text-center">Subscribe now now </p>
                     <div className="flex items-center justify-center gap-8">
-                    <Link href="/">
-                    <Image src="/instagram.png" width={100} height={100} alt="logo" />
+                     <Link href="/">
+                    <Image src="/instagram.png" width={155} height={155} alt="logo" />
                     </Link>
                     <Link href="/">
-                    <Image src="/spotify.png" width={100} height={100} alt="logo" />
+                    <Image src="/spotify.png" width={150} height={150} alt="logo" />
                     </Link>
                     <Link href="/">
-                    <Image src="/youtube-podcast.png" width={90} height={90}  alt="logo" />
+                    <Image src="/youtube-podcast.png" width={130} height={130}  alt="logo" />
                     </Link>
                     </div>
                     </div>
