@@ -62,7 +62,7 @@ export default function Header(){
                         </div>
                         <Button
                             onClick={toggleMenu}
-                            className="p-2 rounded-full border-2 bg-transparent border-destructive transition-colors px-2 text-destructive"
+                            className="p-2 rounded-full border bg-transparent border-destructive/70 transition-colors px-2 text-destructive"
                         >
                           Close   <div className="p-0.5 ml-1 flex items-center justify-center border border-destructive rounded-full text-destructive"><X className="w-5 h-5" /></div>
                         </Button>
@@ -110,7 +110,7 @@ export default function Header(){
                             </Button>
                          
                    <div className="mt-10">
-                    <p className="text-md font-bold text-white text-center">Subscribe now now </p>
+                    <p className="text-md font-bold text-white text-center mb-5">Subscribe now now </p>
                     <div className="flex items-center justify-center gap-8">
                      <Link href="/">
                     <Image src="/instagram.png" width={155} height={155} alt="logo" />
