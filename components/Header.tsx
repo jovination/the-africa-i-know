@@ -110,7 +110,7 @@ export default function Header(){
                             </Button>
                          
                    <div className="mt-10">
-                    <p classnaName="text-md font-bold text-white text-center">Subscribe now now </p>
+                    <p className="text-md font-bold text-white text-center">Subscribe now now </p>
                     <div className="flex items-center justify-center gap-8">
                     <Link href="/">
                     <Image src="/instagram.png" width={100} height={100} alt="logo" />
