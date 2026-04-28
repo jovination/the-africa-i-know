@@ -123,6 +123,10 @@ export default function Header(){
                     </Link>
                     </div>
                     </div>
+                    <div className="flex flex-col items-center mt-8">
+                    <p className="text-xl  text-white text-center">THE AFRICA I KNOW © {new Date().getFullYear()}</p>
+                    </div>
+
 
                         </div>
                     </div>
