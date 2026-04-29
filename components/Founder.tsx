@@ -7,7 +7,7 @@ import { FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
     return (
         <div className="w-full bg-[#FEF7ED]">
         <div className="w-full container mx-auto px-6 md:px-8 py-10 flex flex-col md:flex-row gap-10">
-            <div className="flex items-center justify-center max-w-145 w-full h-150 overflow-hidden relative rounded-2xl">
+            <div className="flex items-center justify-center max-w-145 w-full h-100 md:h-150 overflow-hidden relative rounded-2xl">
                 <Image src="/The-Founder.webp" alt="Founder" fill className="object-cover" />
             </div>
             <div className="max-w-2xl">

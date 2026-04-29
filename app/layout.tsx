@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   title: "The Africa I Know | The Great Africans Podcast",
   description: "The Africa I Know (TAIK) is the definitive digital home for African stories, voices, and innovation, amplifying Pan-African narratives through The Great Africans Podcast.",
   keywords: "African podcast, Pan-African movement, African leadership stories, Africa I Know, TAIK, The Great Africans Podcast, African stories, African voices, African innovation, Diaspora Africans",
+  icons: {
+    icon: "/African-new.png",
+  },
   openGraph: {
     title: "The Africa I Know | The Great Africans Podcast",
     description: "The Africa I Know (TAIK) is the definitive digital home for African stories, voices, and innovation, amplifying Pan-African narratives through The Great Africans Podcast.",

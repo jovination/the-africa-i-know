@@ -17,14 +17,20 @@ export default function Hero(){
             </div>
             <div className="w-full mt-4 grid grid-cols-1  md:flex md:items-center md:justify-center md:px-15 gap-6">
                 <div className="md:max-w-142.5 w-full space-y-5">
-                <div className=" h-100 bg-gray-200 rounded-2xl overflow-hidden relative cursor-pointer">
+                <div className=" h-80 md:h-100 bg-gray-200 rounded-3xl overflow-hidden relative cursor-pointer">
                     <Image src="/dar-es-salaam.png" fill className="object-cover" alt="Dar es Salaam" />
+                    <div className="absolute top-4 left-4 px-5 py-2 bg-black/20 backdrop-blur-md border border-white/60 rounded-full">
+                        <p className="text-white font-semibold text-sm">Featured</p>
+                    </div>
                 </div>
                 <span className="text-2xl text-[#737373] mt-20">Dar es Salaam, Tanzania - Visual by iam_jerry.tz </span>
                 </div>
                 <div className="md:max-w-142.5 w-full space-y-5">
-                <div className=" h-100 bg-gray-200 rounded-2xl overflow-hidden relative cursor-pointer">
+                <div className=" h-80 md:h-100 bg-gray-200 rounded-3xl overflow-hidden relative cursor-pointer">
                     <Image src="/nigeria.png" fill className="object-cover" alt="Nairobi" />
+                    <div className="absolute top-4 left-4 px-5 py-2 bg-black/20 backdrop-blur-md border border-white/60 rounded-full">
+                        <p className="text-white font-semibold text-sm">Featured</p>
+                    </div>
                 </div>
                 <span className="text-2xl text-[#737373]">Lagos, Nigeria - Visual By telemediang</span>
                 </div>
