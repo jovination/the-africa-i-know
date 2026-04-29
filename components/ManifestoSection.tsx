@@ -26,7 +26,7 @@ export default function ManifestoSection() {
             </div>
         <div className='w-full flex flex-col items-center'>
         <YouTubePodcastPlayer
-        youtubeUrl="https://youtu.be/DHKPLklcXRU?si=0wGAgvsVHW4l8IjO"
+        youtubeUrl="https://youtu.be/ag_I7UOvA8w?si=CbG4T6eNRyWgiiPT"
       />
                 </div>
             </div>

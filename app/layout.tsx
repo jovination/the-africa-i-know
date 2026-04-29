@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     url: "https://africaiknow.com",
     images: [
       {
-        url: "https://africaiknow.com/og-image.jpg",
+        url: "https://africaiknow.com/og-image.webp",
       },
     ],
   },
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "The Africa I Know | The Great Africans Podcast",
     description: "The Africa I Know (TAIK) is the definitive digital home for African stories, voices, and innovation, amplifying Pan-African narratives through The Great Africans Podcast.",
-    images: ["https://africaiknow.com/twitter-image.jpg"],
+    images: ["https://africaiknow.com/og-image.webp"],
   },
 };
 

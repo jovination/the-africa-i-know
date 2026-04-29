@@ -7,7 +7,7 @@ import Image from "next/image"
 export default function Hero(){
     return(
         <div className="container mx-auto px-6 md:px-8 w-full">
-            <div className="py-20 w-full flex flex-col items-center space-y-4">
+            <div className="py-10 md:py-20 w-full flex flex-col items-center space-y-4">
             <Button className="bg-[#F3F3F3] text-black hover:bg-[#F3f3f3] ">A movement. A mindset. A mirror of who we are.</Button>
             <h1 className="text-black text-4xl md:text-6xl font-bold text-center">THE AFRICA I KNOW</h1>
             <p className="max-w-md w-full text-center text-[#878787] text-sm">A Pan-African platform celebrating innovation, resilience, and abundance amplifying voices that move our continent forward.</p>

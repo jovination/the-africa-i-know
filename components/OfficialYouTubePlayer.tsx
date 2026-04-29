@@ -102,10 +102,9 @@ export default function OfficialYouTubePlayer({
     const getBarCount = () => {
       if (typeof window !== 'undefined') {
         const width = window.innerWidth;
-        if (width < 640) return 60;      // Mobile
-        if (width < 768) return 100;     // Tablet
-        if (width < 1024) return 140;    // Small desktop
-        return 170;                      // Large desktop
+        if (width < 768) return 30;     // Tablet
+        if (width < 1024) return 70;    // Small desktop
+        return 165;                      // Large desktop
       }
       return 170; // Default
     };
