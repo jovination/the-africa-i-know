@@ -4,6 +4,7 @@ import Image from "next/image";
 import ManifestoSection from "@/components/ManifestoSection"
 import Footer from "@/components/Footer";
 import NominateBuilder from "@/components/NominateBuilder";
+import Founder from "@/components/Founder";
 
 
 
@@ -16,6 +17,7 @@ export default function Home() {
       </div>
       <ManifestoSection />
       <NominateBuilder />
+      <Founder />
       <Footer />
     </div>
   );

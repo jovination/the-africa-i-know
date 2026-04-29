@@ -28,9 +28,8 @@ export default function Header(){
             </div>
 
             <div className="hidden md:block ">
-                <Button variant="outline" className="text-sm font-bold text-black border-2 border-black px-6">Join the Movement </Button>
-                <Button variant="ghost" className="text-sm font-bold">Eng 
-                </Button>    
+                <Button variant="outline" className="text-sm font-bold text-black border border-black/50 px-8 h-12">Join the Movement </Button>
+                   
             </div>
             <div className="md:hidden">
                 <Image 

@@ -15,15 +15,15 @@ export default function Hero(){
                 <Button className="w-full bg-[#9F8033] h-13 hover:bg-[#9f8033]/90 px-6">Listen the Great Africans     <Mic className="ml-2" /></Button>
                 <Button variant="outline" className="w-full h-13 text-black border-2 border-black/70 px-6"> Follow the Movement <ArrowRight className="ml-2" /></Button>
             </div>
-            <div className="w-full mt-4 grid grid-cols-1 md:grid-cols-2 md:px-15 gap-6">
-                <div className="w-full space-y-5">
-                <div className="md:max-w-[570px] w-full h-[400px] bg-gray-200 rounded-2xl overflow-hidden relative">
+            <div className="w-full mt-4 grid grid-cols-1  md:flex md:items-center md:justify-center md:px-15 gap-6">
+                <div className="md:max-w-142.5 w-full space-y-5">
+                <div className=" h-100 bg-gray-200 rounded-2xl overflow-hidden relative cursor-pointer">
                     <Image src="/dar-es-salaam.png" fill className="object-cover" alt="Dar es Salaam" />
                 </div>
                 <span className="text-2xl text-[#737373] mt-20">Dar es Salaam, Tanzania - Visual by iam_jerry.tz </span>
                 </div>
-                <div className="w-full space-y-5">
-                <div className="md:max-w-[570px] w-full h-[400px] bg-gray-200 rounded-2xl overflow-hidden relative">
+                <div className="md:max-w-142.5 w-full space-y-5">
+                <div className=" h-100 bg-gray-200 rounded-2xl overflow-hidden relative cursor-pointer">
                     <Image src="/nigeria.png" fill className="object-cover" alt="Nairobi" />
                 </div>
                 <span className="text-2xl text-[#737373]">Lagos, Nigeria - Visual By telemediang</span>
