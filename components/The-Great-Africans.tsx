@@ -38,7 +38,7 @@ export default function TheGreatAfricans() {
                     <p className="text-3xl font-bold">Dr Mzamo Masito</p>
                     <p className="text-sm text-right">Author. Advocate. Builder.</p>
                 </div>
-                <div className="md:w-180 w-full h-100 md:h-130 relative overflow-hidden rounded-2xl mt-10">
+                <div className="md:w-180 w-full h-80 md:h-130 relative overflow-hidden rounded-2xl mt-10">
                     <Image src="/guest.webp" fill alt="Guest" className="object-cover"  />
                 </div>
                 <div className="flex flex-col items-center mt-10">
