@@ -23,19 +23,19 @@ import { FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                 <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                    <div className="flex items-center justify-center gap-3 bg-[#A435B5] text-white px-4 py-2 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
+                    <div className="flex items-center justify-center gap-3 bg-[#A435B5] text-white px-3 py-2 rounded-md cursor-pointer hover:opacity-90 transition-opacity">
                         <FaInstagram size={28} />
                         <p className="text-md font-medium">Instagram</p>
                     </div>
                 </Link>
                 <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                    <div className="flex items-center justify-center gap-3 bg-[#0077B5] text-white px-4 py-2 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
+                    <div className="flex items-center justify-center gap-3 bg-[#0077B5] text-white px-3 py-2 rounded-md cursor-pointer hover:opacity-90 transition-opacity">
                         <FaLinkedin size={28} />
                         <p className="text-md font-medium">LinkedIn</p>
                     </div>
                 </Link>
                 <Link href="https://x.com" target="_blank" rel="noopener noreferrer">
-                    <div className="flex items-center justify-center gap-3 bg-[#000000] text-white px-4 py-2 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">
+                    <div className="flex items-center justify-center gap-3 bg-[#000000] text-white px-3 py-2 rounded-md cursor-pointer hover:opacity-90 transition-opacity">
                         <FaXTwitter size={28} />
                     </div>
                 </Link>
