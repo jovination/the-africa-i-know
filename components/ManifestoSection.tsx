@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import YouTubePodcastPlayer from './YouTubePodcastPlayer';
 
 export default function ManifestoSection() {
     return (
@@ -20,8 +21,14 @@ export default function ManifestoSection() {
                     <p className="font-bold text-xl max-w-lg">“This is not just a communications exercise. It is a movement grounded in Ubuntu. Every post, every story, every conversation is part of a larger mosaic of an Africa that is moving forward, together.”</p>
 
                 </div>
+        
 
             </div>
+        <div className='w-full flex flex-col items-center'>
+        <YouTubePodcastPlayer
+        youtubeUrl="https://youtu.be/DHKPLklcXRU?si=0wGAgvsVHW4l8IjO"
+      />
+                </div>
             </div>
 
         </div>
