@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Mic } from "lucide-react";
 
@@ -25,7 +25,9 @@ export default function TheGreatAfricans() {
                     <p>Available on </p>
                     <p className="font-bold"> Apple Podcasts, Spotify, YouTube, and wherever you listen.</p>
                 </div>
- <Button className="w-fit mt-4 bg-[#9F8033] h-13 hover:bg-[#9f8033]/90 px-12">Listen Now     <Mic className="ml-2" /></Button>
+               <Link href="https://www.youtube.com/@TheGreatAfricans" target="_blank" rel="noopener noreferrer">
+                    <Button className="w-fit mt-4 bg-[#9F8033] h-13 hover:bg-[#9f8033]/90 px-12">Listen Now     <Mic className="ml-2" /></Button>
+                </Link>
 
 
 
