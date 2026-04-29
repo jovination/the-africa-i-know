@@ -5,7 +5,7 @@ import { Mic } from "lucide-react";
 export default function TheGreatAfricans() {
     return (
         <div className=" w-full container mx-auto py-12 flex flex-col items-center px-6 md:px-8">
-            <div className="max-w-4xl w-full h- md:h-125 rounded-2xl overflow-hidden relative">
+            <div className="max-w-4xl w-full h-90 md:h-125 rounded-2xl overflow-hidden relative">
                 <iframe
                     src="https://www.youtube.com/embed/ag_I7UOvA8w"
                     className="w-full h-full"
