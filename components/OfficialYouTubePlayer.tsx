@@ -225,10 +225,10 @@ export default function OfficialYouTubePlayer({
       {/* Hidden YouTube Player */}
       <div ref={playerRef} className="hidden" />
 
-      <div className="flex gap-6">
+      <div className="flex flex-col md:flex-row gap-6">
         {/* Cover Image */}
-        <div className="shrink-0">
-          <div className="relative w-48 h-50 rounded-2xl overflow-hidden">
+        <div className="shrink-0 w-full md:w-auto">
+          <div className="relative w-full md:w-48 h-64 rounded-2xl overflow-hidden">
             <Image
               src={finalCoverImage}
               alt={title || 'Video'}
@@ -269,7 +269,7 @@ export default function OfficialYouTubePlayer({
                 className="absolute inset-0 cursor-pointer group"
               >
                 {/* Waveform visualization */}
-                <div className="absolute inset-0 flex items-center justify-center gap-px px-2">
+                <div className="absolute inset-0 hidden md:flex items-center justify-center gap-px px-2">
                   {waveformData.map((height, index) => {
                     const barProgress = (index / waveformData.length) * 100;
                     const isPlayed = barProgress <= progress;
@@ -292,6 +292,16 @@ export default function OfficialYouTubePlayer({
                       </div>
                     );
                   })}
+                </div>
+
+                {/* Simple progress bar for mobile */}
+                <div className="absolute inset-0 md:hidden flex items-center">
+                  <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-green-500 transition-all duration-100"
+                      style={{ width: `${progress}%` }}
+                    />
+                  </div>
                 </div>
 
                 {/* Time indicators */}
@@ -361,9 +371,9 @@ export default function OfficialYouTubePlayer({
         onClick={() => setShowTranscript(!showTranscript)}
         className="flex items-center justify-between w-full mt-6 pt-6 border-t border-gray-200"
       >
-        <p className="text-blue-600 font-bold text-md m-0">Read Transcript</p>
+        <p className="text-blue-600 font-bold text-sm m-0">Read Transcript</p>
         <ChevronDown
-          className={`w-8 h-8 text-blue-600 transition-transform ${showTranscript ? 'rotate-180' : ''}`}
+          className={`w-5 h-5 text-blue-600 transition-transform ${showTranscript ? 'rotate-180' : ''}`}
         />
       </button>
 
@@ -371,8 +381,7 @@ export default function OfficialYouTubePlayer({
       {showTranscript && (
         <div className="mt-4 p-6 bg-gray-50 rounded-xl max-h-64 overflow-y-auto">
           <p className="text-gray-700 leading-relaxed text-sm">
-            Transcript content would appear here. This is a placeholder for the video transcript
-            that would be displayed when the user clicks &quot;Read Transcript&quot;.
+            Transcript content is not available for this video.
           </p>
         </div>
       )}
