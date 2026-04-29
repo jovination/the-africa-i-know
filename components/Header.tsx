@@ -13,6 +13,17 @@ export default function Header(){
         setIsMenuOpen(!isMenuOpen);
     };
 
+    const scrollToJoinForm = () => {
+        const form = document.getElementById('join-form');
+        if (form) {
+            form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        // Close mobile menu if open
+        if (isMenuOpen) {
+            setIsMenuOpen(false);
+        }
+    };
+
     return(
         <div className="container mx-auto px-5 md:px-8  py-4 w-full flex items-center justify-between">
             <div className="space-x-3 hidden md:block">
@@ -28,7 +39,13 @@ export default function Header(){
             </div>
 
             <div className="hidden md:block ">
-                <Button variant="outline" className="text-sm font-bold text-black border border-black/50 px-8 h-12">Join the Movement </Button>
+                <Button 
+                    variant="outline" 
+                    className="text-sm font-bold text-black border border-black/50 px-8 h-12" 
+                    onClick={scrollToJoinForm}
+                >
+                    Join the Movement 
+                </Button>
                    
             </div>
             <div className="md:hidden">
@@ -103,7 +120,7 @@ export default function Header(){
                             <Button 
                 
                             className="w-full text-lg font-bold  text-white text-center  font-medium py-3 px-4 rounded-full h-13 bg-[#9D8033] transition-colors"
-                                onClick={toggleMenu}
+                                onClick={scrollToJoinForm}
                             >
                                 Join the Movement
                             </Button>
@@ -111,14 +128,14 @@ export default function Header(){
                    <div className="mt-10">
                     <p className="text-md font-bold text-white text-center mb-5">Subscribe now now </p>
                     <div className="flex items-center justify-center gap-8">
-                     <Link href="/">
-                    <Image src="/instagram.png" width={155} height={155} alt="logo" />
+                     <Link href="https://www.instagram.com/theafricaiknow_taik" target="_blank" rel="noopener noreferrer">
+                    <Image src="/instagram.png" width={155} height={155} alt="Instagram" />
                     </Link>
-                    <Link href="/">
-                    <Image src="/spotify.png" width={150} height={150} alt="logo" />
+                    <Link href="https://open.spotify.com/episode/0GGO5IuSEqxXCi9xDcHMX4" target="_blank" rel="noopener noreferrer">
+                    <Image src="/spotify.png" width={150} height={150} alt="Spotify" />
                     </Link>
-                    <Link href="/">
-                    <Image src="/youtube-podcast.png" width={130} height={130}  alt="logo" />
+                    <Link href="https://www.youtube.com/@TheGreatAfricans" target="_blank" rel="noopener noreferrer">
+                    <Image src="/youtube-podcast.png" width={130} height={130}  alt="YouTube" />
                     </Link>
                     </div>
                     </div>

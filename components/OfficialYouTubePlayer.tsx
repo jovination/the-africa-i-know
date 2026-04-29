@@ -98,7 +98,19 @@ export default function OfficialYouTubePlayer({
   }, [videoId, title, description]);
 
   const generateWaveform = useCallback(() => {
-    const bars = 170;
+    // Responsive number of bars based on screen size
+    const getBarCount = () => {
+      if (typeof window !== 'undefined') {
+        const width = window.innerWidth;
+        if (width < 640) return 60;      // Mobile
+        if (width < 768) return 100;     // Tablet
+        if (width < 1024) return 140;    // Small desktop
+        return 170;                      // Large desktop
+      }
+      return 170; // Default
+    };
+
+    const bars = getBarCount();
     const wave: number[] = [];
     for (let i = 0; i < bars; i++) {
       const height = Math.random() * 0.8 + 0.2;
