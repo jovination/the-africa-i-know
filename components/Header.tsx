@@ -27,7 +27,7 @@ export default function Header(){
     return(
         <div className="container mx-auto px-5 md:px-8  py-4 w-full flex items-center justify-between">
             <div className="space-x-3 hidden md:block">
-                <Link href="" className="text-sm font-bold">Stories</Link>
+                <Link href="/stories" className="text-sm font-bold">Stories</Link>
                 <Link href="" className="text-sm font-bold">Manifesto</Link>
                 <Link href="" className="text-sm font-bold">Podcast</Link>
                 <Link href="" className="text-sm font-bold">Cities</Link>
