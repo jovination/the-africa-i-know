@@ -24,11 +24,22 @@ export default function Header(){
         }
     };
 
+    const scrollToManifesto = () => {
+        const manifesto = document.getElementById('manifesto');
+        if (manifesto) {
+            manifesto.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        // Close mobile menu if open
+        if (isMenuOpen) {
+            setIsMenuOpen(false);
+        }
+    };
+
     return(
         <div className="container mx-auto px-5 md:px-8  py-4 w-full flex items-center justify-between">
             <div className="space-x-3 hidden md:block">
                 <Link href="/stories" className="text-sm font-bold">Stories</Link>
-                <Link href="" className="text-sm font-bold">Manifesto</Link>
+                <button onClick={scrollToManifesto} className="text-sm font-bold cursor-pointer">Manifesto</button>
                 <Link href="" className="text-sm font-bold">Podcast</Link>
                 <Link href="" className="text-sm font-bold">Cities</Link>
             </div>
@@ -87,19 +98,18 @@ export default function Header(){
                     {/* Menu Items */}
                     <div className="flex flex-col p-6 space-y-4">
                         <Link 
-                            href="" 
+                            href="/stories" 
                             className="text-lg  text-white text-center  font-medium py-3 px-4 rounded-full h-13 border border-[#9D8033]/20 transition-colors"
                             onClick={toggleMenu}
                         >
                             Stories
                         </Link>
-                        <Link 
-                            href="" 
+                        <button 
+                            onClick={scrollToManifesto}
                             className="text-lg  text-white text-center  font-medium py-3 px-4 rounded-full h-13 border border-[#9D8033]/20 transition-colors"
-                            onClick={toggleMenu}
                         >
                             Manifesto
-                        </Link>
+                        </button>
                         <Link 
                             href="" 
                             className="flex items-center fon justify-center text-lg  text-[#9D8033] text-center  font-medium py-3 px-4 rounded-full h-13 border border-[#9D8033] transition-colors"

@@ -3,7 +3,7 @@ import YouTubePodcastPlayer from './YouTubePodcastPlayer';
 
 export default function ManifestoSection() {
     return (
-        <div className="w-full min-h-screen bg-[#FEF7ED] ">
+        <div id="manifesto" className="w-full min-h-screen bg-[#FEF7ED] ">
             <div className="w-full container mx-auto px-6 md:px-8 flex flex-col items-center py-10 space-y-4">
             <span className="text-5xl text-center">The Manifesto</span>
             <p className="max-w-md text-md font-bold text-center">Africa is not a place of lack it is a place of light.</p>

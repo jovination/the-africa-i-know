@@ -17,7 +17,7 @@ export default function Stories() {
                 </Link>
                 <p className="mt-3 text-xl font-bold pl-6">Stories from across the continent are on their way. Innovation. Resilience. Ubuntu. The voices of Africa told by Africans.</p>
 
-                <div className="w-full my-20 bg-[#FEF7ED] rounded-2xl h-150 flex flex-col items-center justify-center space-y-3">
+                <div className="w-full my-20 bg-[#FEF7ED] rounded-2xl h-150 flex flex-col items-center justify-center space-y-3 p-10">
                     <Image src="/Error.svg" alt="Stories" width={300} height={300} />
                     <p className="text-2xl font-bold mt-10">No stories yet</p>
                     <p className="text-md max-w-md text-center">We are curating stories of builders, leaders, and changemakers from across Africa. Be the first to know when they arrive.</p>
