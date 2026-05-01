@@ -94,7 +94,7 @@ export default function Cities(){
                         
                     </Card>
                 ))}
-                <div className="w-full bg-[#FEF7ED] rounded-2xl p-8 text-center flex flex-col items-center justify-center">
+                <div className="w-full bg-[#FEF7ED] rounded-2xl p-8 text-center flex flex-col items-center justify-center shadow-sm">
                     <p className="text-4xl font-bold mb-4 text-center">More cities<br />coming soon.</p>
                     <p className="text-lg text-gray-600 ">Want yours featured?</p>
                     <p className="text-md text-gray-700 font-medium">Tag us with <strong>#MyCityIn60Seconds</strong></p>
