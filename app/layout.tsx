@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Abhaya_Libre } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -79,7 +80,9 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${abhayaLibre.variable} ${kaufmann.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <TooltipProvider>{children}</TooltipProvider>
+      </body>
     </html>
   );
 }
