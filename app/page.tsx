@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import NominateBuilder from "@/components/NominateBuilder";
 import Founder from "@/components/Founder";
 import TheGreatAfricans from "@/components/The-Great-Africans";
+import Cities from "@/components/Cities";
 
 
 
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       </div>
       <ManifestoSection />
+      <Cities />
       <TheGreatAfricans />
       <NominateBuilder />
       <Founder />
