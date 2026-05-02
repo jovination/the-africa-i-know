@@ -28,6 +28,7 @@ export default function PodcastList() {
   if (loading) {
     return (
       <div className="w-full flex flex-col items-center justify-center min-h-96">
+        <Spinner />
       </div>
     )
   }
