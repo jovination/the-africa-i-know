@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Mic, X } from 'lucide-react';
+import { ChevronDown, Mic, X } from 'lucide-react';
 
 export default function Header(){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,6 +17,17 @@ export default function Header(){
         const form = document.getElementById('join-form');
         if (form) {
             form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        // Close mobile menu if open
+        if (isMenuOpen) {
+            setIsMenuOpen(false);
+        }
+    };
+
+    const scrollToCities = () => {
+        const cities = document.getElementById('cities');
+        if (cities) {
+            cities.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
         // Close mobile menu if open
         if (isMenuOpen) {
@@ -41,15 +52,15 @@ export default function Header(){
                 <Link href="/stories" className="text-sm font-bold">Stories</Link>
                 <button onClick={scrollToManifesto} className="text-sm font-bold cursor-pointer">Manifesto</button>
                 <Link href="" className="text-sm font-bold">Podcast</Link>
-                <Link href="" className="text-sm font-bold">Cities</Link>
+                <button onClick={scrollToCities} className="text-sm font-bold cursor-pointer">Cities</button>
             </div>
             <div>
-                <Link href="">
+                <Link href="/">
                 <Image src="/Africa-new.png" className="size-24 md:size-32" width={120} height={120} alt="logo" />
                 </Link>
             </div>
 
-            <div className="hidden md:block ">
+            <div className="hidden md:flex items-center gap-4">
                 <Button 
                     variant="outline" 
                     className="text-sm font-bold text-black border border-black/50 px-8 h-12" 
@@ -57,6 +68,13 @@ export default function Header(){
                 >
                     Join the Movement 
                 </Button>
+                <div className="flex items-center gap-1 cursor-pointer">
+            <div className="w-6 h-6 rounded-full overflow-hidden bg-black">
+              <Image src="/eng.png" alt="flag" width={24} height={24} className="w-full h-full object-cover" />
+            </div>
+            <p className="text-base font-normal text-black">Eng</p>
+            <ChevronDown size={14} className="text-black" />
+          </div>
                    
             </div>
             <div className="md:hidden">
@@ -117,13 +135,12 @@ export default function Header(){
                         >
                             Podcast <Mic className="ml-3 " />
                         </Link>
-                        <Link 
-                            href="" 
+                        <button 
+                            onClick={scrollToCities}
                             className="text-lg  text-white text-center  font-medium py-3 px-4 rounded-full h-13 border border-[#9D8033]/20 transition-colors"
-                            onClick={toggleMenu}
                         >
                             Cities
-                        </Link>
+                        </button>
                         
                         {/* Action Buttons */}
                         <div className="pt-4 space-y-3">

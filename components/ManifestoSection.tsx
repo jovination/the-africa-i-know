@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import YouTubePodcastPlayer from './YouTubePodcastPlayer';
+import PodcastList from './PodcastList';
 
 export default function ManifestoSection() {
     return (
@@ -24,10 +24,8 @@ export default function ManifestoSection() {
         
 
             </div>
-        <div className='w-full flex flex-col items-center'>
-        <YouTubePodcastPlayer
-        youtubeUrl="https://youtu.be/ag_I7UOvA8w?si=CbG4T6eNRyWgiiPT"
-      />
+        <div className='w-full flex flex-col items-center mt-10'>
+        <PodcastList />
                 </div>
             </div>
 

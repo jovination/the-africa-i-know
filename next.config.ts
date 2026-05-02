@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
         hostname: 'youtube.com',
         pathname: '/embed/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
     ],
   },
 };

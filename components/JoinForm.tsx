@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import * as z from "zod"
+import { submitJoinMovement } from "@/lib/api"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -65,30 +66,10 @@ function JoinFormComponent() {
   async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      // Debug: Log the data being sent
       console.log('Submitting data:', { name: data.name, email: data.email });
-      
-      // Use FormData for Google Sheets integration
-      const formData = new FormData();
-      formData.append('name', data.name);
-      formData.append('email', data.email);
-      
-      // Debug: Log FormData contents
-      for (const [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
-      }
 
-      await fetch(
-        'https://script.google.com/macros/s/AKfycbwriNEJLrPAvKnWEEgWxoQ5pULelmo4ZGX97Kc5IJrKYfwe8BS7wjNZQKgYes4EAsAL/exec',
-        {
-          method: 'POST',
-          body: formData,
-          mode: 'no-cors', // This is critical for Google Scripts
-        }
-      );
+      await submitJoinMovement({ name: data.name, email: data.email });
 
-      // Because 'no-cors' returns an opaque response, 
-      // we manually trigger success if fetch doesn't throw.
       toast("Successfully joined!", {
         description: "Welcome to The Africa I Know community. You're now subscribed.",
         position: "bottom-right",

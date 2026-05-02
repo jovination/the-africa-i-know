@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import * as z from "zod"
+import { submitNominee } from "@/lib/api"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -17,7 +18,6 @@ import {
 } from "@/components/ui/card"
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -83,24 +83,15 @@ function NomineeFormComponent() {
   async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      // Use FormData instead of URLSearchParams for better compatibility
-      const formData = new FormData();
-      formData.append('name', data.name);
-      formData.append('email', data.email);
-      formData.append('subject', data.subject || '');
-      formData.append('message', data.message);
+      console.log('Submitting nomination:', data);
 
-      await fetch(
-        'https://script.google.com/macros/s/AKfycbxUh03v75-jyHm-KUPVO20cQnzvuJ4ttRiUlabtIWzkku4IqiHxVqENmS7D7ltulfZHnw/exec',
-        {
-          method: 'POST',
-          body: formData,
-          mode: 'no-cors', // This is critical for Google Scripts
-        }
-      );
+      await submitNominee({ 
+        name: data.name, 
+        email: data.email,
+        subject: data.subject || '',
+        message: data.message
+      });
 
-      // Because 'no-cors' returns an opaque response, 
-      // we manually trigger success if fetch doesn't throw.
       toast("Nomination submitted successfully!", {
         description: "Thank you for nominating an Everyday Builder. Your submission has been received.",
         position: "bottom-right",
