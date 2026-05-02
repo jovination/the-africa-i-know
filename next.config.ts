@@ -23,8 +23,20 @@ const nextConfig: NextConfig = {
         hostname: 'images.unsplash.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'dashboard.africaiknow.com',
+        pathname: '/**',
+      },
     ],
   },
+  // Production domain configuration
+  productionBrowserSourceMaps: false,
+  // Environment-specific configuration
+  ...(process.env.NODE_ENV === 'production' && {
+    assetPrefix: undefined,
+    trailingSlash: true,
+  }),
 };
 
 export default nextConfig;
