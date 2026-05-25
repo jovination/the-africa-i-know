@@ -1,11 +1,12 @@
 "use client";
 
-import Image, { type ImageProps } from "next/image";
-import { useState } from "react";
+import { useState, type ImgHTMLAttributes } from "react";
 import { normalizeImageUrl } from "@/lib/image-url";
 
-type RemoteImageProps = Omit<ImageProps, "src"> & {
+type RemoteImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> & {
   src: string;
+  width?: number;
+  height?: number;
 };
 
 export function RemoteImage({
@@ -14,6 +15,7 @@ export function RemoteImage({
   height,
   loading = "lazy",
   className,
+  alt = "",
   onError,
   ...props
 }: RemoteImageProps) {
@@ -26,14 +28,17 @@ export function RemoteImage({
   }
 
   return (
-    <Image
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
       {...props}
       src={normalizedSrc}
+      alt={alt}
       width={width}
       height={height}
       loading={loading}
       className={className}
       referrerPolicy="no-referrer"
+      decoding="async"
       onError={(event) => {
         setError(true);
         onError?.(event);
