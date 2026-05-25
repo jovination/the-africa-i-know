@@ -88,7 +88,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
                     <div className="text-sm text-black leading-relaxed whitespace-pre-line mb-6 md:mb-10">
                       {section.body}
                     </div>
-                    {section.image && section.image !== story.featuredImage && (
+                    {section.image && (
                       <div className="overflow-hidden h-50 md:h-100 lg:h-120 rounded-lg mb-8 md:mb-12">
                         <RemoteImage
                           src={section.image}
