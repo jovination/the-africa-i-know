@@ -1,14 +1,24 @@
+export const IMAGE_PLACEHOLDER = "/Africa-new.png";
+
 /**
  * Converts pasted sharing links (Google Drive, Imgur, etc.) into direct image URLs
- * that Next.js Image can load.
+ * that Next.js Image can load. Returns a local placeholder for invalid links.
  */
 export function normalizeImageUrl(url: string, width = 1000): string {
-  if (!url || url.startsWith("/")) {
+  if (!url) {
+    return IMAGE_PLACEHOLDER;
+  }
+
+  if (url.startsWith("/")) {
     return url;
   }
 
   try {
     const parsed = new URL(url);
+
+    if (parsed.pathname.includes("/folders/")) {
+      return IMAGE_PLACEHOLDER;
+    }
 
     if (parsed.hostname === "drive.google.com") {
       const fileId =
@@ -18,6 +28,8 @@ export function normalizeImageUrl(url: string, width = 1000): string {
       if (fileId) {
         return `https://lh3.googleusercontent.com/d/${fileId}=w${width}`;
       }
+
+      return IMAGE_PLACEHOLDER;
     }
 
     if (parsed.hostname.endsWith("googleusercontent.com")) {
@@ -42,6 +54,8 @@ export function normalizeImageUrl(url: string, width = 1000): string {
       if (directId && directId !== "gallery" && directId !== "a") {
         return `https://i.imgur.com/${directId}.jpg`;
       }
+
+      return IMAGE_PLACEHOLDER;
     }
 
     if (parsed.hostname === "i.imgur.com" && !parsed.pathname.includes(".")) {
@@ -50,6 +64,6 @@ export function normalizeImageUrl(url: string, width = 1000): string {
 
     return url;
   } catch {
-    return url;
+    return IMAGE_PLACEHOLDER;
   }
 }

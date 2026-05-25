@@ -1,9 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import Image from "next/image";
 import { getStories, type Story } from "@/app/data/stories";
-import { normalizeImageUrl } from "@/lib/image-url";
+import { RemoteImage } from "@/components/RemoteImage";
 import { StoryCard } from "@/components/StoryCard";
 import { notFound } from "next/navigation";
 import { FaInstagram, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
@@ -87,8 +86,8 @@ export default async function StoryPage({ params }: StoryPageProps) {
 
                 {/* Featured image */}
                 <div className="overflow-hidden mb-8 md:mb-12 h-55 md:h-105 lg:h-125  rounded-2xl">
-                  <Image
-                    src={normalizeImageUrl(story.featuredImage)}
+                  <RemoteImage
+                    src={story.featuredImage}
                     alt={story.title}
                     width={1000}
                     height={1000}
@@ -109,8 +108,8 @@ export default async function StoryPage({ params }: StoryPageProps) {
                     </div>
                     {section.image && idx < story.sections.length - 1 && (
                       <div className="overflow-hidden h-50 md:h-100 lg:h-120 rounded-lg mb-8 md:mb-12">
-                        <Image
-                          src={normalizeImageUrl(section.image)}
+                        <RemoteImage
+                          src={section.image}
                           alt=""
                           width={1000}
                           height={1000}
