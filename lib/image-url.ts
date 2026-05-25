@@ -1,5 +1,3 @@
-export const IMAGE_PLACEHOLDER = "/Africa-new.png";
-
 export const GOOGLE_DRIVE_IMAGE_SIZE = "w1200";
 
 export function extractGoogleDriveFileId(url: string): string | null {
@@ -29,11 +27,11 @@ function toGoogleDriveImageUrl(fileId: string, size = GOOGLE_DRIVE_IMAGE_SIZE): 
 
 /**
  * Converts pasted sharing links (Google Drive, Imgur, etc.) into direct image URLs.
- * Returns a local placeholder for invalid or empty links.
+ * Returns an empty string for invalid or missing links.
  */
 export function normalizeImageUrl(url: string, width?: number): string {
-  if (!url) {
-    return IMAGE_PLACEHOLDER;
+  if (!url?.trim()) {
+    return "";
   }
 
   if (url.startsWith("/")) {
@@ -51,7 +49,7 @@ export function normalizeImageUrl(url: string, width?: number): string {
     const parsed = new URL(url);
 
     if (parsed.pathname.includes("/folders/")) {
-      return IMAGE_PLACEHOLDER;
+      return "";
     }
 
     if (parsed.hostname.endsWith("googleusercontent.com") && !url.includes("=w")) {
@@ -77,7 +75,7 @@ export function normalizeImageUrl(url: string, width?: number): string {
         return `https://i.imgur.com/${directId}.jpg`;
       }
 
-      return IMAGE_PLACEHOLDER;
+      return "";
     }
 
     if (parsed.hostname === "i.imgur.com" && !parsed.pathname.includes(".")) {
@@ -86,6 +84,6 @@ export function normalizeImageUrl(url: string, width?: number): string {
 
     return url;
   } catch {
-    return IMAGE_PLACEHOLDER;
+    return "";
   }
 }

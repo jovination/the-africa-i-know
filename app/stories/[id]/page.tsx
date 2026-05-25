@@ -5,7 +5,6 @@ import { getStories, type Story } from "@/app/data/stories";
 import { RemoteImage } from "@/components/RemoteImage";
 import { StoryCard } from "@/components/StoryCard";
 import { notFound } from "next/navigation";
-import { FaInstagram, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 
 interface StoryPageProps {
@@ -51,25 +50,6 @@ export default async function StoryPage({ params }: StoryPageProps) {
                     By {story.author}
                   </p>
                 </div>
-
-                {/* Share */}
-                <div className="flex flex-col gap-2">
-                  <p className="text-base md:text-lg text-black">Share</p>
-                  <div className="flex gap-2 items-center flex-wrap">
-                    <a href="#" className="hover:opacity-70 transition-opacity p-2 rounded-full hover:bg-gray-100">
-                      <FaInstagram className="w-6 h-6 text-gray-700" />
-                    </a>
-                    <a href="#" className="hover:opacity-70 transition-opacity p-2 rounded-full hover:bg-gray-100">
-                      <FaFacebook className="w-6 h-6 text-gray-700" />
-                    </a>
-                    <a href="#" className="hover:opacity-70 transition-opacity p-2 rounded-full hover:bg-gray-100">
-                      <FaTwitter className="w-6 h-6 text-gray-700" />
-                    </a>
-                    <a href="#" className="hover:opacity-70 transition-opacity p-2 rounded-full hover:bg-gray-100">
-                      <FaLinkedin className="w-6 h-6 text-gray-700" />
-                    </a>
-                  </div>
-                </div>
               </aside>
 
               {/* Main article content */}
@@ -84,17 +64,18 @@ export default async function StoryPage({ params }: StoryPageProps) {
                   {story.intro}
                 </p>
 
-                {/* Featured image */}
-                <div className="overflow-hidden mb-8 md:mb-12 h-55 md:h-105 lg:h-125  rounded-2xl">
-                  <RemoteImage
-                    src={story.featuredImage}
-                    alt={story.title}
-                    width={1000}
-                    height={1000}
-                    loading="eager"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                {story.featuredImage && (
+                  <div className="overflow-hidden mb-8 md:mb-12 h-55 md:h-105 lg:h-125 rounded-2xl">
+                    <RemoteImage
+                      src={story.featuredImage}
+                      alt={story.title}
+                      width={1000}
+                      height={1000}
+                      loading="eager"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
 
                 {/* Content sections */}
                 {story.sections.map((section, idx) => (
@@ -107,11 +88,11 @@ export default async function StoryPage({ params }: StoryPageProps) {
                     <div className="text-sm text-black leading-relaxed whitespace-pre-line mb-6 md:mb-10">
                       {section.body}
                     </div>
-                    {section.image && idx < story.sections.length - 1 && (
+                    {section.image && section.image !== story.featuredImage && (
                       <div className="overflow-hidden h-50 md:h-100 lg:h-120 rounded-lg mb-8 md:mb-12">
                         <RemoteImage
                           src={section.image}
-                          alt=""
+                          alt={section.heading || story.title}
                           width={1000}
                           height={1000}
                           className="w-full h-full object-cover"
@@ -124,17 +105,16 @@ export default async function StoryPage({ params }: StoryPageProps) {
             </div>
           </div>
 
-          {/* More Articles */}
-          <section className=" py-12  border-t border-gray-100 mt-8">
-            <span className="text-5xl">
-              More Articles
-            </span>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mt-10">
-              {moreStories.map((s) => (
-                <StoryCard key={s.id} story={s} />
-              ))}
-            </div>
-          </section>
+          {moreStories.length > 0 && (
+            <section className="py-12 border-t border-gray-100 mt-8">
+              <span className="text-5xl">More Articles</span>
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mt-10">
+                {moreStories.map((s) => (
+                  <StoryCard key={s.id} story={s} />
+                ))}
+              </div>
+            </section>
+          )}
         </main>
       </div>
       <Footer />
