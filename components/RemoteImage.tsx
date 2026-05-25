@@ -1,7 +1,11 @@
 "use client";
 
 import { useState, type ImgHTMLAttributes } from "react";
-import { normalizeImageUrl } from "@/lib/image-url";
+import {
+  extractGoogleDriveFileId,
+  normalizeImageUrl,
+  toGoogleDriveExportUrl,
+} from "@/lib/image-url";
 
 type RemoteImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> & {
   src: string;
@@ -20,18 +24,21 @@ export function RemoteImage({
   ...props
 }: RemoteImageProps) {
   const imageWidth = typeof width === "number" ? width : 1200;
-  const normalizedSrc = normalizeImageUrl(src, imageWidth);
-  const [error, setError] = useState(false);
+  const fileId = extractGoogleDriveFileId(src);
+  const primarySrc = normalizeImageUrl(src, imageWidth);
+  const [imgSrc, setImgSrc] = useState(primarySrc);
+  const [failed, setFailed] = useState(false);
 
-  if (!normalizedSrc || error) {
+  if (!primarySrc || failed) {
     return null;
   }
 
   return (
+    // Plain img bypasses /_next/image — Google Drive URLs break Next.js image optimization on Vercel.
     // eslint-disable-next-line @next/next/no-img-element
     <img
       {...props}
-      src={normalizedSrc}
+      src={imgSrc}
       alt={alt}
       width={width}
       height={height}
@@ -40,7 +47,11 @@ export function RemoteImage({
       referrerPolicy="no-referrer"
       decoding="async"
       onError={(event) => {
-        setError(true);
+        if (fileId && imgSrc !== toGoogleDriveExportUrl(fileId)) {
+          setImgSrc(toGoogleDriveExportUrl(fileId));
+          return;
+        }
+        setFailed(true);
         onError?.(event);
       }}
     />

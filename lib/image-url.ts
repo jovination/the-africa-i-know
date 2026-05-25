@@ -25,6 +25,11 @@ function toGoogleDriveImageUrl(fileId: string, size = GOOGLE_DRIVE_IMAGE_SIZE): 
   return `https://lh3.googleusercontent.com/d/${fileId}=${size}-rw`;
 }
 
+/** Fallback when lh3 CDN URL fails — works with plain <img>, not next/image optimizer. */
+export function toGoogleDriveExportUrl(fileId: string): string {
+  return `https://drive.google.com/uc?export=view&id=${fileId}`;
+}
+
 /**
  * Converts pasted sharing links (Google Drive, Imgur, etc.) into direct image URLs.
  * Returns an empty string for invalid or missing links.
