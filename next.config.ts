@@ -5,6 +5,14 @@ const nextConfig: NextConfig = {
     // Disable /_next/image — Google Drive and other remote URLs fail with
     // INVALID_IMAGE_OPTIMIZE_REQUEST on Vercel. Story images use plain <img>.
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
   },
   // Production domain configuration
   productionBrowserSourceMaps: false,
