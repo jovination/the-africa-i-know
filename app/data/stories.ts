@@ -1,3 +1,5 @@
+import { normalizeImageUrl } from "@/lib/image-url";
+
 export interface StorySection {
   heading?: string;
   body: string;
@@ -59,9 +61,12 @@ export async function getStories(): Promise<Story[]> {
       authorRole: story.authorRole,
       date: story.date,
       intro: story.intro,
-      cardImage: story.cardImage,
-      featuredImage: story.featuredImage,
-      sections: story.sections
+      cardImage: normalizeImageUrl(story.cardImage),
+      featuredImage: normalizeImageUrl(story.featuredImage),
+      sections: story.sections.map((section) => ({
+        ...section,
+        image: section.image ? normalizeImageUrl(section.image) : section.image,
+      })),
     }));
   } catch (error) {
     console.error('Error fetching stories:', error);
