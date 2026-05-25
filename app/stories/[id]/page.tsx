@@ -91,6 +91,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
                     alt={story.title}
                     width={1000}
                     height={1000}
+                    loading="eager"
                     className="w-full h-full object-cover"
                   />
                 </div>

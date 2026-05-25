@@ -1,16 +1,50 @@
 export const IMAGE_PLACEHOLDER = "/Africa-new.png";
 
+export const GOOGLE_DRIVE_IMAGE_SIZE = "w1200";
+
+export function extractGoogleDriveFileId(url: string): string | null {
+  const trimmed = url.trim();
+  if (!trimmed) return null;
+
+  const patterns = [
+    /drive\.google\.com\/file\/d\/([^/?#]+)/i,
+    /drive\.google\.com\/open\?id=([^&]+)/i,
+    /drive\.google\.com\/uc(?:\?|\/)(?:[^#]*&)?id=([^&]+)/i,
+    /drive\.google\.com\/thumbnail\?id=([^&]+)/i,
+    /drive\.usercontent\.google\.com\/(?:download|uc)\?(?:[^#]*&)?id=([^&]+)/i,
+    /lh3\.googleusercontent\.com\/d\/([^=/?#]+)/i,
+  ];
+
+  for (const pattern of patterns) {
+    const match = trimmed.match(pattern);
+    if (match?.[1]) return match[1];
+  }
+
+  return null;
+}
+
+function toGoogleDriveImageUrl(fileId: string, size = GOOGLE_DRIVE_IMAGE_SIZE): string {
+  return `https://lh3.googleusercontent.com/d/${fileId}=${size}-rw`;
+}
+
 /**
- * Converts pasted sharing links (Google Drive, Imgur, etc.) into direct image URLs
- * that Next.js Image can load. Returns a local placeholder for invalid links.
+ * Converts pasted sharing links (Google Drive, Imgur, etc.) into direct image URLs.
+ * Returns a local placeholder for invalid or empty links.
  */
-export function normalizeImageUrl(url: string, width = 1000): string {
+export function normalizeImageUrl(url: string, width?: number): string {
   if (!url) {
     return IMAGE_PLACEHOLDER;
   }
 
   if (url.startsWith("/")) {
     return url;
+  }
+
+  const size = width ? `w${width}` : GOOGLE_DRIVE_IMAGE_SIZE;
+
+  const fileId = extractGoogleDriveFileId(url);
+  if (fileId) {
+    return toGoogleDriveImageUrl(fileId, size);
   }
 
   try {
@@ -20,22 +54,10 @@ export function normalizeImageUrl(url: string, width = 1000): string {
       return IMAGE_PLACEHOLDER;
     }
 
-    if (parsed.hostname === "drive.google.com") {
-      const fileId =
-        url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)?.[1] ??
-        parsed.searchParams.get("id");
-
-      if (fileId) {
-        return `https://lh3.googleusercontent.com/d/${fileId}=w${width}`;
-      }
-
-      return IMAGE_PLACEHOLDER;
-    }
-
-    if (parsed.hostname.endsWith("googleusercontent.com")) {
-      const fileId = url.match(/\/d\/([a-zA-Z0-9_-]+)/)?.[1];
-      if (fileId && !url.includes("=w")) {
-        return `https://lh3.googleusercontent.com/d/${fileId}=w${width}`;
+    if (parsed.hostname.endsWith("googleusercontent.com") && !url.includes("=w")) {
+      const id = url.match(/\/d\/([^=/?#]+)/)?.[1];
+      if (id) {
+        return toGoogleDriveImageUrl(id, size);
       }
     }
 
