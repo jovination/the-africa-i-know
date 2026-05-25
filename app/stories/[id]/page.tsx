@@ -1,8 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { getStories, type Story } from "@/app/data/stories";
-import { RemoteImage } from "@/components/RemoteImage";
+import { getStories } from "@/app/data/stories";
+import { StoryImage } from "@/components/StoryImage";
 import { StoryCard } from "@/components/StoryCard";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,8 @@ interface StoryPageProps {
     id: string;
   }>;
 }
+
+export const dynamic = "force-dynamic";
 
 export default async function StoryPage({ params }: StoryPageProps) {
   const { id } = await params;
@@ -66,11 +68,9 @@ export default async function StoryPage({ params }: StoryPageProps) {
 
                 {story.featuredImage && (
                   <div className="overflow-hidden mb-8 md:mb-12 h-55 md:h-105 lg:h-125 rounded-2xl">
-                    <RemoteImage
+                    <StoryImage
                       src={story.featuredImage}
                       alt={story.title}
-                      width={1000}
-                      height={1000}
                       loading="eager"
                       className="w-full h-full object-cover"
                     />
@@ -90,11 +90,9 @@ export default async function StoryPage({ params }: StoryPageProps) {
                     </div>
                     {section.image && (
                       <div className="overflow-hidden h-50 md:h-100 lg:h-120 rounded-lg mb-8 md:mb-12">
-                        <RemoteImage
+                        <StoryImage
                           src={section.image}
                           alt={section.heading || story.title}
-                          width={1000}
-                          height={1000}
                           className="w-full h-full object-cover"
                         />
                       </div>
@@ -120,12 +118,4 @@ export default async function StoryPage({ params }: StoryPageProps) {
       <Footer />
     </div>
   );
-}
-
-// Generate static params for all stories
-export async function generateStaticParams() {
-  const stories = await getStories();
-  return stories.map((story: Story) => ({
-    id: story.id,
-  }));
 }

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Story } from "@/app/data/stories";
-import { RemoteImage } from "@/components/RemoteImage";
+import { StoryImage } from "@/components/StoryImage";
 
 interface StoryCardProps {
   story: Story;
@@ -14,12 +14,10 @@ export function StoryCard({ story }: StoryCardProps) {
     >
       {/* Image */}
       <div className="rounded-[14px] overflow-hidden bg-black h-55 sm:h-[260px] xl:h-[300px]">
-        <RemoteImage
+        <StoryImage
           src={story.cardImage}
           alt={story.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          width={400}
-          height={300}
         />
       </div>
 
