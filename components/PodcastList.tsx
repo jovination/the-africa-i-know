@@ -56,6 +56,7 @@ export default function PodcastList() {
           <div className="w-full max-w-6xl">
             <YouTubePodcastPlayer
               youtubeUrl={podcast.youtubeUrl}
+              youtubeId={podcast.youtubeId}
               title={podcast.title}
               description={`Host: ${podcast.host}${podcast.guest ? ` | Guest: ${podcast.guest}` : ''}`}
               episodeTitle={podcast.title}

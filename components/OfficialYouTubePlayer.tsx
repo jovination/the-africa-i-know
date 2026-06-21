@@ -6,10 +6,37 @@ import Image from 'next/image';
 
 interface OfficialYouTubePlayerProps {
   youtubeUrl: string;
+  youtubeId?: string;
   title?: string;
   description?: string;
   episodeTitle?: string;
   coverImage?: string;
+}
+
+const pendingYouTubePlayerCallbacks: Array<() => void> = [];
+let youTubeApiLoading = false;
+
+function queueYouTubePlayerInit(callback: () => void) {
+  if (window.YT?.Player) {
+    callback();
+    return;
+  }
+
+  pendingYouTubePlayerCallbacks.push(callback);
+
+  if (youTubeApiLoading) return;
+  youTubeApiLoading = true;
+
+  const tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  const firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+
+  const previousReady = window.onYouTubeIframeAPIReady;
+  window.onYouTubeIframeAPIReady = () => {
+    previousReady?.();
+    pendingYouTubePlayerCallbacks.splice(0).forEach((cb) => cb());
+  };
 }
 
 interface YouTubePlayer {
@@ -37,6 +64,7 @@ declare global {
 
 export default function OfficialYouTubePlayer({
   youtubeUrl,
+  youtubeId: youtubeIdProp,
   title,
   description,
   episodeTitle,
@@ -60,6 +88,7 @@ export default function OfficialYouTubePlayer({
       /[?&]v=([a-zA-Z0-9_-]{11})/,
       /youtu\.be\/([a-zA-Z0-9_-]{11})/,
       /embed\/([a-zA-Z0-9_-]{11})/,
+      /shorts\/([a-zA-Z0-9_-]{11})/,
       /^([a-zA-Z0-9_-]{11})$/
     ];
 
@@ -72,7 +101,7 @@ export default function OfficialYouTubePlayer({
     return '';
   }, []);
 
-  const videoId = extractVideoId(youtubeUrl);
+  const videoId = extractVideoId(youtubeUrl) || youtubeIdProp || '';
 
   // Fetch video metadata from YouTube oEmbed
   useEffect(() => {
@@ -146,21 +175,9 @@ export default function OfficialYouTubePlayer({
     });
   }, [videoId, generateWaveform]);
 
-  // Load YouTube IFrame API
   useEffect(() => {
     if (!videoId) return;
-
-    // Load API script if not already loaded
-    if (!window.YT) {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
-
-      window.onYouTubeIframeAPIReady = initializePlayer;
-    } else {
-      initializePlayer();
-    }
+    queueYouTubePlayerInit(initializePlayer);
   }, [videoId, initializePlayer]);
 
   // Update time periodically
@@ -226,7 +243,7 @@ export default function OfficialYouTubePlayer({
   if (!videoId) {
     return (
       <div className="bg-white rounded-2xl p-8 w-full max-w-5xl border border-gray-200">
-        <p className="text-center text-gray-600">Loading video...</p>
+        <p className="text-center text-gray-600">Unable to load this video. Check the YouTube link in the dashboard.</p>
       </div>
     );
   }

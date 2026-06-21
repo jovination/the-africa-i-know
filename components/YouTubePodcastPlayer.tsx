@@ -4,6 +4,7 @@ import OfficialYouTubePlayer from './OfficialYouTubePlayer';
 
 interface YouTubePodcastPlayerProps {
   youtubeUrl: string;
+  youtubeId?: string;
   title?: string;
   description?: string;
   episodeTitle?: string;
@@ -11,6 +12,7 @@ interface YouTubePodcastPlayerProps {
 
 export default function YouTubePodcastPlayer({
   youtubeUrl,
+  youtubeId,
   title,
   description,
   episodeTitle
@@ -18,6 +20,7 @@ export default function YouTubePodcastPlayer({
   return (
     <OfficialYouTubePlayer
       youtubeUrl={youtubeUrl}
+      youtubeId={youtubeId}
       title={title}
       description={description}
       episodeTitle={episodeTitle}
