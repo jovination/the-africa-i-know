@@ -1,6 +1,7 @@
 "use client"
 
 import { Suspense } from "react"
+import { PodcastListSkeleton } from "@/components/PodcastPlayerSkeleton"
 
 interface StoriesSuspenseProps {
   children: React.ReactNode
@@ -70,6 +71,19 @@ export function StoryDetailSuspense({ children, fallback }: StoryDetailSuspenseP
 
   return (
     <Suspense fallback={fallback || defaultFallback}>
+      {children}
+    </Suspense>
+  )
+}
+
+interface PodcastsSuspenseProps {
+  children: React.ReactNode
+  fallback?: React.ReactNode
+}
+
+export function PodcastsSuspense({ children, fallback }: PodcastsSuspenseProps) {
+  return (
+    <Suspense fallback={fallback || <PodcastListSkeleton />}>
       {children}
     </Suspense>
   )

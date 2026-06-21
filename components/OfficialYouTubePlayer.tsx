@@ -46,6 +46,7 @@ interface YouTubePlayer {
   getCurrentTime: () => number;
   getDuration: () => number;
   setPlaybackRate: (rate: number) => void;
+  destroy: () => void;
 }
 
 declare global {
@@ -80,6 +81,7 @@ export default function OfficialYouTubePlayer({
   const [videoTitle, setVideoTitle] = useState<string>(title || '');
   const [videoAuthor, setVideoAuthor] = useState<string>(description || '');
   const playerRef = useRef<HTMLDivElement>(null);
+  const youtubePlayerInstance = useRef<YouTubePlayer | null>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
 
   // Extract video ID from URL
@@ -148,19 +150,24 @@ export default function OfficialYouTubePlayer({
   }, []);
 
   const initializePlayer = useCallback(() => {
-    if (!videoId || !playerRef.current) return;
+    if (!videoId || !playerRef.current || youtubePlayerInstance.current) return;
+
+    const origin = window.location.origin;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    new (window.YT.Player as any)(playerRef.current, {
+    youtubePlayerInstance.current = new (window.YT.Player as any)(playerRef.current, {
       videoId: videoId,
+      width: '1',
+      height: '1',
       playerVars: {
         autoplay: 0,
         controls: 0,
         disablekb: 1,
+        enablejsapi: 1,
         fs: 0,
         modestbranding: 1,
+        origin,
         rel: 0,
-        showinfo: 0,
       },
       events: {
         onReady: (event: { target: YouTubePlayer }) => {
@@ -178,6 +185,12 @@ export default function OfficialYouTubePlayer({
   useEffect(() => {
     if (!videoId) return;
     queueYouTubePlayerInit(initializePlayer);
+
+    return () => {
+      youtubePlayerInstance.current?.destroy();
+      youtubePlayerInstance.current = null;
+      setPlayer(null);
+    };
   }, [videoId, initializePlayer]);
 
   // Update time periodically
@@ -249,9 +262,13 @@ export default function OfficialYouTubePlayer({
   }
 
   return (
-    <div className="bg-white rounded-2xl p-4 w-full max-w-6xl border border-gray-200">
-      {/* Hidden YouTube Player */}
-      <div ref={playerRef} className="hidden" />
+    <div className="relative bg-white rounded-2xl p-4 w-full max-w-6xl border border-gray-200">
+      {/* Off-screen player — must stay in DOM with dimensions for the YouTube API */}
+      <div
+        ref={playerRef}
+        className="absolute w-px h-px overflow-hidden opacity-0 pointer-events-none"
+        aria-hidden="true"
+      />
 
       <div className="flex flex-col md:flex-row gap-6">
         {/* Cover Image */}
@@ -383,9 +400,14 @@ export default function OfficialYouTubePlayer({
               <button className="hover:text-blue-600 transition-colors font-medium">
                 <p className="m-0 text-sm">Share</p>
               </button>
-              <button className="hover:text-blue-600 transition-colors font-medium">
+              <a
+                href="https://www.youtube.com/@TheGreatAfricans"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 transition-colors font-medium"
+              >
                 <p className="m-0 text-sm">Subscribe</p>
-              </button>
+              </a>
             </div>
           </div>
 

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import PodcastList from './PodcastList';
+import { PodcastsSuspense } from '@/components/ui/suspense';
 
 export default function ManifestoSection() {
     return (
@@ -25,7 +26,9 @@ export default function ManifestoSection() {
 
             </div>
         <div className='w-full flex flex-col items-center mt-10'>
+        <PodcastsSuspense>
         <PodcastList />
+        </PodcastsSuspense>
                 </div>
             </div>
 
