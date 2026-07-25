@@ -73,6 +73,7 @@ export interface City {
   platform: string;
   location: string;
   country: string;
+  featured: boolean;
 }
 
 // City CRUD Request/Response Types
@@ -87,6 +88,7 @@ export interface UpdateCityRequest {
   videoUrl?: string;
   location?: string;
   country?: string;
+  featured?: boolean;
 }
 
 export interface DeleteCityRequest {
@@ -179,6 +181,10 @@ export const CityValidationSchema = {
     minLength: 2,
     maxLength: 100,
     pattern: /^[a-zA-Z\s\-'.]+$/
+  },
+  featured: {
+    required: false,
+    type: 'boolean'
   }
 };
 
@@ -238,6 +244,7 @@ export interface CityFormData {
   videoUrl: string;
   location: string;
   country: string;
+  featured: boolean;
 }
 
 export interface FormState<T> {

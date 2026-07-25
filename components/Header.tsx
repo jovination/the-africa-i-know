@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -13,15 +13,30 @@ export default function Header(){
         setIsMenuOpen(!isMenuOpen);
     };
 
+    // Lock body scroll while the mobile drawer is open (fixes iOS scroll-through)
+    useEffect(() => {
+        if (isMenuOpen) {
+            const scrollY = window.scrollY;
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollY}px`;
+            document.body.style.width = '100%';
+        } else {
+            const scrollY = document.body.style.top;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            if (scrollY) {
+                window.scrollTo(0, parseInt(scrollY || '0') * -1);
+            }
+        }
+    }, [isMenuOpen]);
+
     const scrollToJoinForm = () => {
         const form = document.getElementById('join-form');
         if (form) {
             form.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-        // Close mobile menu if open
-        if (isMenuOpen) {
-            setIsMenuOpen(false);
-        }
+        if (isMenuOpen) setIsMenuOpen(false);
     };
 
     const scrollToCities = () => {
@@ -29,10 +44,7 @@ export default function Header(){
         if (cities) {
             cities.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-        // Close mobile menu if open
-        if (isMenuOpen) {
-            setIsMenuOpen(false);
-        }
+        if (isMenuOpen) setIsMenuOpen(false);
     };
 
     const scrollToManifesto = () => {
@@ -40,14 +52,11 @@ export default function Header(){
         if (manifesto) {
             manifesto.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-        // Close mobile menu if open
-        if (isMenuOpen) {
-            setIsMenuOpen(false);
-        }
+        if (isMenuOpen) setIsMenuOpen(false);
     };
 
     return(
-        <div className="container mx-auto px-5 md:px-8  py-4 w-full flex items-center justify-between">
+        <div className="container mx-auto px-5 md:px-8 py-4 w-full flex items-center justify-between">
             <div className="space-x-3 hidden md:block">
                 <Link href="/stories" className="text-sm font-bold">Stories</Link>
                 <button onClick={scrollToManifesto} className="text-sm font-bold cursor-pointer">Manifesto</button>
@@ -69,14 +78,14 @@ export default function Header(){
                     Join the Movement 
                 </Button>
                 <div className="flex items-center gap-1 cursor-pointer">
-            <div className="w-6 h-6 rounded-full overflow-hidden bg-black">
-              <Image src="/eng.png" alt="flag" width={24} height={24} className="w-full h-full object-cover" />
+                    <div className="w-6 h-6 rounded-full overflow-hidden bg-black">
+                        <Image src="/eng.png" alt="flag" width={24} height={24} className="w-full h-full object-cover" />
+                    </div>
+                    <p className="text-base font-normal text-black">Eng</p>
+                    <ChevronDown size={14} className="text-black" />
+                </div>
             </div>
-            <p className="text-base font-normal text-black">Eng</p>
-            <ChevronDown size={14} className="text-black" />
-          </div>
-                   
-            </div>
+
             <div className="md:hidden">
                 <Image 
                     src="/menu.svg" 
@@ -89,21 +98,26 @@ export default function Header(){
             </div>
 
             {/* Mobile Menu Drawer */}
-            <div className={`fixed inset-0 z-50 transition-transform duration-300 ease-in-out ${
-                isMenuOpen ? 'translate-y-0' : '-translate-y-full'
-            }`}>
+            <div
+                className={`fixed inset-0 z-50 h-dvh w-dvw transition-all duration-300 ease-in-out ${
+                    isMenuOpen
+                        ? 'translate-y-0 opacity-100 visible pointer-events-auto'
+                        : '-translate-y-full opacity-0 invisible pointer-events-none'
+                }`}
+                aria-hidden={!isMenuOpen}
+            >
                 {/* Backdrop */}
                 <div 
                     className="absolute inset-0 bg-black/50"
                     onClick={toggleMenu}
                 />
-                
+
                 {/* Menu Content */}
-                <div className="relative  bg-[#2C2421] w-full h-auto">
+                <div className="relative bg-[#2C2421] w-full h-dvh overflow-y-auto">
                     {/* Menu Header */}
                     <div className="flex items-center justify-between p-6">
                         <div className="flex items-center gap-3">
-                            <Image src="/African-new.png" width={100} height={100} alt="logo" />
+                            <Image src="/African-new.png" width={100} height={100} alt="logo" style={{ width: 'auto', height: 'auto' }} />
                         </div>
                         <Button
                             onClick={toggleMenu}
@@ -112,70 +126,66 @@ export default function Header(){
                           Close   <div className="p-0.5 ml-1 flex items-center justify-center border border-destructive rounded-full text-destructive"><X className="w-5 h-5" /></div>
                         </Button>
                     </div>
-                    
+
                     {/* Menu Items */}
                     <div className="flex flex-col p-6 space-y-4">
                         <Link 
                             href="/stories" 
-                            className="text-lg  text-white text-center  font-medium py-3 px-4 rounded-full h-13 border border-[#9D8033]/20 transition-colors"
+                            className="text-lg text-white text-center font-medium py-3 px-4 rounded-full h-13 border border-[#9D8033]/20 transition-colors"
                             onClick={toggleMenu}
                         >
                             Stories
                         </Link>
                         <button 
                             onClick={scrollToManifesto}
-                            className="text-lg  text-white text-center  font-medium py-3 px-4 rounded-full h-13 border border-[#9D8033]/20 transition-colors"
+                            className="text-lg text-white text-center font-medium py-3 px-4 rounded-full h-13 border border-[#9D8033]/20 transition-colors"
                         >
                             Manifesto
                         </button>
                         <Link 
                             href="" 
-                            className="flex items-center fon justify-center text-lg  text-[#9D8033] text-center  font-medium py-3 px-4 rounded-full h-13 border border-[#9D8033] transition-colors"
+                            className="flex items-center justify-center text-lg text-[#9D8033] text-center font-medium py-3 px-4 rounded-full h-13 border border-[#9D8033] transition-colors"
                             onClick={toggleMenu}
                         >
-                            Podcast <Mic className="ml-3 " />
+                            Podcast <Mic className="ml-3" />
                         </Link>
                         <button 
                             onClick={scrollToCities}
-                            className="text-lg  text-white text-center  font-medium py-3 px-4 rounded-full h-13 border border-[#9D8033]/20 transition-colors"
+                            className="text-lg text-white text-center font-medium py-3 px-4 rounded-full h-13 border border-[#9D8033]/20 transition-colors"
                         >
                             Cities
                         </button>
-                        
+
                         {/* Action Buttons */}
                         <div className="pt-4 space-y-3">
                             <Button 
-                
-                            className="w-full text-lg font-bold  text-white text-center  font-medium py-3 px-4 rounded-full h-13 bg-[#9D8033] transition-colors"
+                                className="w-full text-lg font-bold text-white text-center py-3 px-4 rounded-full h-13 bg-[#9D8033] transition-colors"
                                 onClick={scrollToJoinForm}
                             >
                                 Join the Movement
                             </Button>
-                         
-                   <div className="mt-10">
-                    <p className="text-md font-bold text-white text-center mb-5">Subscribe now now </p>
-                    <div className="flex items-center justify-center gap-8">
-                     <Link href="https://www.instagram.com/theafricaiknow_taik" target="_blank" rel="noopener noreferrer">
-                    <Image src="/instagram.png" width={155} height={155} alt="Instagram" />
-                    </Link>
-                    <Link href="https://open.spotify.com/episode/0GGO5IuSEqxXCi9xDcHMX4" target="_blank" rel="noopener noreferrer">
-                    <Image src="/spotify.png" width={150} height={150} alt="Spotify" />
-                    </Link>
-                    <Link href="https://www.youtube.com/@TheGreatAfricans" target="_blank" rel="noopener noreferrer">
-                    <Image src="/youtube-podcast.png" width={130} height={130}  alt="YouTube" />
-                    </Link>
-                    </div>
-                    </div>
-                    <div className="flex flex-col items-center mt-8">
-                    <p className="text-xl  text-white text-center">THE AFRICA I KNOW © {new Date().getFullYear()}</p>
-                    </div>
 
-
+                            <div className="mt-10">
+                                <p className="text-md font-bold text-white text-center mb-5">Subscribe now</p>
+                                <div className="flex items-center justify-center gap-8">
+                                    <Link href="https://www.instagram.com/theafricaiknow_taik" target="_blank" rel="noopener noreferrer">
+                                        <Image src="/instagram.png" width={155} height={155} alt="Instagram" style={{ width: 'auto', height: 'auto' }} />
+                                    </Link>
+                                    <Link href="https://open.spotify.com/episode/0GGO5IuSEqxXCi9xDcHMX4" target="_blank" rel="noopener noreferrer">
+                                        <Image src="/spotify.png" width={150} height={150} alt="Spotify" style={{ width: 'auto', height: 'auto' }} />
+                                    </Link>
+                                    <Link href="https://www.youtube.com/@TheGreatAfricans" target="_blank" rel="noopener noreferrer">
+                                        <Image src="/youtube-podcast.png" width={130} height={130} alt="YouTube" style={{ width: 'auto', height: 'auto' }} />
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="flex flex-col items-center mt-8">
+                                <p className="text-xl text-white text-center">THE AFRICA I KNOW © {new Date().getFullYear()}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

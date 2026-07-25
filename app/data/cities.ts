@@ -4,6 +4,7 @@ export interface City {
   platform: string; // always "YouTube" (stored in database)
   location: string; // user-entered (stored in database)
   country: string; // user-entered (stored in database)
+  featured: boolean; // featured status for hero display
 }
 
 // YouTube metadata (fetched dynamically from YouTube API)
@@ -28,7 +29,8 @@ export async function getCities(): Promise<City[]> {
       headers: {
         'Authorization': `Bearer ${process.env.NEXT_PUBLIC_AFRICA_PODCAS_API}`,
         'Content-Type': 'application/json'
-      }
+      },
+      next: { tags: ['cities'] }
     });
 
     if (!response.ok) {
@@ -44,6 +46,7 @@ export async function getCities(): Promise<City[]> {
       platform: string;
       location: string;
       country: string;
+      featured: boolean;
     }
     
     return result.data.map((city: APICityResponse) => ({
@@ -51,7 +54,8 @@ export async function getCities(): Promise<City[]> {
       videoUrl: city.videoUrl,
       platform: city.platform,
       location: city.location,
-      country: city.country
+      country: city.country,
+      featured: city.featured ?? false
     }));
   } catch (error) {
     console.error('Error fetching cities:', error);
