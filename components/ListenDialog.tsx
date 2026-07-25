@@ -15,7 +15,7 @@ export function ListenDialog() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-md bg-white">
         <DialogHeader>
-          <DialogTitle className="text-center text-xl md:text-2xl font-bold text-black">Listen to The Great Africans</DialogTitle>
+          <DialogTitle className="text-center text-lg md:text-2xl font-bold text-black">Listen to The Great Africans</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col items-center gap-6 py-8 w-full">
           <div className="flex flex-col justify-center items-center gap-3 w-full">
