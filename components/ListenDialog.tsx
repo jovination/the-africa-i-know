@@ -5,13 +5,15 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Mic } from 'lucide-react'
 import Image from "next/image"
 
-export function ListenDialog() {
+export function ListenDialog({ children }: { children?: React.ReactNode }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="w-full bg-[#9F8033] text-white h-13 hover:bg-[#9f8033]/90 px-6">
-          Listen the Great Africans <Mic className="ml-2" />
-        </Button>
+        {children || (
+          <Button className="w-full bg-[#9F8033] text-white h-13 hover:bg-[#9f8033]/90 px-6">
+            Listen the Great Africans <Mic className="ml-2" />
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md bg-white">
         <DialogHeader>

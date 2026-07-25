@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, Mic, X } from 'lucide-react';
+import { ListenDialog } from '@/components/ListenDialog';
 
 export default function Header(){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,7 +61,9 @@ export default function Header(){
             <div className="space-x-3 hidden md:block">
                 <Link href="/stories" className="text-sm font-bold">Stories</Link>
                 <button onClick={scrollToManifesto} className="text-sm font-bold cursor-pointer">Manifesto</button>
-                <Link href="" className="text-sm font-bold">Podcast</Link>
+                <ListenDialog>
+                    <button className="text-sm font-bold cursor-pointer">Podcast</button>
+                </ListenDialog>
                 <button onClick={scrollToCities} className="text-sm font-bold cursor-pointer">Cities</button>
             </div>
 
@@ -157,13 +160,14 @@ export default function Header(){
                         >
                             Manifesto
                         </button>
-                        <Link 
-                            href="" 
-                            className="flex items-center justify-center text-lg text-[#9D8033] text-center font-medium py-3 px-4 rounded-full h-13 border border-[#9D8033] transition-colors"
-                            onClick={toggleMenu}
-                        >
-                            Podcast <Mic className="ml-3" />
-                        </Link>
+                        <ListenDialog>
+                            <button 
+                                className="flex w-full items-center justify-center text-lg text-[#9D8033] text-center font-medium py-3 px-4 rounded-full h-13 border border-[#9D8033] transition-colors"
+                                onClick={toggleMenu}
+                            >
+                                Podcast <Mic className="ml-3" />
+                            </button>
+                        </ListenDialog>
                         <button 
                             onClick={scrollToCities}
                             className="text-lg text-white text-center font-medium py-3 px-4 rounded-full h-13 border border-[#9D8033]/20 transition-colors"
