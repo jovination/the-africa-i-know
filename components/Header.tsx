@@ -63,9 +63,17 @@ export default function Header(){
                 <Link href="" className="text-sm font-bold">Podcast</Link>
                 <button onClick={scrollToCities} className="text-sm font-bold cursor-pointer">Cities</button>
             </div>
+
+            {/* Header logo */}
             <div>
                 <Link href="/">
-                <Image src="/Africa-new.png" className="size-24 md:size-32" width={120} height={120} alt="logo" />
+                    <Image 
+                        src="/Africa-new.png" 
+                        width={128} 
+                        height={128} 
+                        className="size-24 md:size-32" 
+                        alt="logo" 
+                    />
                 </Link>
             </div>
 
@@ -116,8 +124,15 @@ export default function Header(){
                 <div className="relative bg-[#2C2421] w-full h-dvh overflow-y-auto">
                     {/* Menu Header */}
                     <div className="flex items-center justify-between p-6">
+                        {/* Drawer logo — same size treatment as header logo */}
                         <div className="flex items-center gap-3">
-                            <Image src="/African-new.png" width={100} height={100} alt="logo" style={{ width: 'auto', height: 'auto' }} />
+                            <Image 
+                                src="/African-new.png" 
+                                width={128} 
+                                height={128} 
+                                className="size-24 md:size-32" 
+                                alt="logo" 
+                            />
                         </div>
                         <Button
                             onClick={toggleMenu}
@@ -169,13 +184,13 @@ export default function Header(){
                                 <p className="text-md font-bold text-white text-center mb-5">Subscribe now</p>
                                 <div className="flex items-center justify-center gap-8">
                                     <Link href="https://www.instagram.com/theafricaiknow_taik" target="_blank" rel="noopener noreferrer">
-                                        <Image src="/instagram.png" width={155} height={155} alt="Instagram" style={{ width: 'auto', height: 'auto' }} />
+                                        <Image src="/instagram.png" width={155} height={155} alt="Instagram" />
                                     </Link>
                                     <Link href="https://open.spotify.com/episode/0GGO5IuSEqxXCi9xDcHMX4" target="_blank" rel="noopener noreferrer">
-                                        <Image src="/spotify.png" width={150} height={150} alt="Spotify" style={{ width: 'auto', height: 'auto' }} />
+                                        <Image src="/spotify.png" width={150} height={150} alt="Spotify" />
                                     </Link>
                                     <Link href="https://www.youtube.com/@TheGreatAfricans" target="_blank" rel="noopener noreferrer">
-                                        <Image src="/youtube-podcast.png" width={130} height={130} alt="YouTube" style={{ width: 'auto', height: 'auto' }} />
+                                        <Image src="/youtube-podcast.png" width={130} height={130} alt="YouTube" />
                                     </Link>
                                 </div>
                             </div>
