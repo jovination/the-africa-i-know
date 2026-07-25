@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import {ArrowRight, Mic } from 'lucide-react';
 import Image from "next/image"
 import { ListenDialog } from "@/components/ListenDialog"
+import { FollowButton } from "@/components/FollowButton"
 interface HeroCity {
     id: string;
     title: string;
@@ -72,7 +73,7 @@ export default async function Hero() {
                 <p className="max-w-md w-full text-center text-[#878787] text-sm">A Pan-African platform celebrating innovation, resilience, and abundance amplifying voices that move our continent forward.</p>
                 <div className="w-full md:w-fit grid grid-cols-1 md:grid-cols-2 gap-3 px-5">
                     <ListenDialog />
-                    <Button variant="outline" className="w-full h-13 text-black border-2 border-black/70 px-6"> Follow the Movement <ArrowRight className="ml-2" /></Button>
+                    <FollowButton />
                 </div>
                 <div className="w-full mt-4 grid grid-cols-1  md:flex md:items-center md:justify-center md:px-15 gap-6">
                     {displayCities.map((city, index) => (
